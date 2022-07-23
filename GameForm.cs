@@ -463,10 +463,6 @@ namespace RPG
         {
             return (false, new Recipe());
         }
-        /// <summary>
-        /// 为mod物品实现
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
         public string name;
         public string description = "none";
         public int itemType;
@@ -613,7 +609,6 @@ namespace RPG
             Type type = typeof(ContentInstance<>).MakeGenericType(ItemType);
             PropertyInfo p = type.GetProperty("Instance", BindingFlags.Static | BindingFlags.Public);
             p.SetValue(typeof(ContentInstance<>), obj);
-            typeof(Item).GetFields().Where(c => c.IsPublic).FirstOrDefault
             ItemLoader.ItemList.Add((int)(ItemType.GetField("itemType").GetValue(obj)), obj);
             if (obj.AddRecipe().Item1) ItemLoader.Recipes.Add(obj.AddRecipe().Item2);
         }
